@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import socket
-import argparse
 import sys
 from cryptography.fernet import Fernet
 from classroom import *
@@ -15,13 +14,12 @@ class  Server:
     RECV_BUFFER_SIZE = 1024
     MAX_BACKLOG = 10
 
-
     SOCKET_ADDR = (HOST, PORT)
 
     #encryption_key = Fernet.generate_key()
-    encryption_key = "bVE5-55Cgksfgg9VQBXjHEBiycWiodLT5_BmwHenKcQ="
-    encryption_key_bytes = encryption_key.encode('utf-8')
-    fernet = Fernet(encryption_key_bytes)
+    #encryption_key = "bVE5-55Cgksfgg9VQBXjHEBiycWiodLT5_BmwHenKcQ="
+    #encryption_key_bytes = encryption_key.encode('utf-8')
+    #fernet = Fernet(encryption_key_bytes)
 
     def __init__(self):
         my_class = Classroom(class_file="course_grades_2023.csv")
@@ -34,7 +32,7 @@ class  Server:
     def create_listen_socket(self):
         try:
             # Create  IPv4 socket
-            self.socket = socket.socket(socket.AF_INET, socket.SOCk_STREAM)
+            self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
             # Allow reuse without waiting for timeout
             self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
@@ -79,13 +77,14 @@ class  Server:
                     break
                 
                 #Decode message  and print
-                recvd_decrypt = Server.fernet.decrypt(recvd)
-                recvd_str =  recvd_decrypt.decode("utf-8")
+                recvd_str =  recvd.decode("utf-8")
                 print("Received: ", recvd_str)
+
             except Exception:
                 print("Error")
                 sys.exit(1)
 
+
                 
 if __name__ == "__main__":
-    
+   Server()

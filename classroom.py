@@ -9,7 +9,7 @@ class Classroom:
 
         self.import_class_info()
         self.parse_class_info()
-        self.print_class_info()
+        #self.print_class_info()
 
     def  import_class_info(self):
         try: 
