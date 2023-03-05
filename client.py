@@ -23,6 +23,11 @@ class Client:
         self.connect_to_server()
         self.send_console_input_forever()
 
+        #receive data from server
+        #decrypt message
+        #close conncetion
+        #wait for another user command
+
     def get_socket(self):
         try:
             # Create an IPv4 TCP socket.

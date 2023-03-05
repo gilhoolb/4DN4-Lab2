@@ -9,7 +9,7 @@ class Classroom:
 
         self.import_class_info()
         self.parse_class_info()
-        #self.print_class_info()
+        self.print_class_info()
 
     def  import_class_info(self):
         try: 
@@ -57,26 +57,26 @@ class Classroom:
     def print_class_info(self):
         print("Class Info:")
         print("(Name, ID Number, Key, Lab 1, Lab 2, Lab 3, Lab 4, Midterm, Exam 1, Exam 2, Exam 3, Exam 4)\n")
-        for student in self.student_list:
-            print(student)
+        for student in self.students:
+            student_info = self.students[student]
+            print(getattr(student_info,"name"))
     
-    def process_request(self, command):
-        
-        if command == "GMA":
+    # def process_request(self, command):
+    #     if command == "GMA":
             
-        elif command == "GEA":
+    #     elif command == "GEA":
 
-        elif command == "GL1A":
+    #     elif command == "GL1A":
 
-        elif command == "GL2A":
+    #     elif command == "GL2A":
         
-        elif command == "GL3A":
+    #     elif command == "GL3A":
 
-        elif command == "GL4A":
+    #     elif command == "GL4A":
 
-        elif command == "GG":
+    #     elif command == "GG":
         
-        else
+    #     else:
 
 if __name__ == "__main__":
     classroom = Classroom("course_grades_2023.csv")

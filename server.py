@@ -80,7 +80,15 @@ class  Server:
                 recvd_str =  recvd.decode("utf-8")
                 print("Received: ", recvd_str)
 
-                self.my_class.process_request(recvd_str)
+                #self.my_class.process_request(recvd_str)
+
+                #Encrypt result of above
+
+                #send back to client
+
+                #close connection
+
+                #return to listen state
 
             except Exception:
                 print("Error")
