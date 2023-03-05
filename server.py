@@ -82,7 +82,7 @@ class  Server:
                 print("Received: ", recvd_str)
 
                 result = self.my_class.process_request(recvd_str)
-
+                print(result)
                 #Encrypt result of above
 
                 #send back to client
@@ -92,7 +92,7 @@ class  Server:
                 #return to listen state
 
             except Exception as ass:
-                print(str(ass))
+                print("error:",ass)
                 sys.exit(1)
 
             

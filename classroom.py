@@ -60,15 +60,13 @@ class Classroom:
         print("(Name, ID Number, Key, Lab 1, Lab 2, Lab 3, Lab 4, Midterm, Exam 1, Exam 2, Exam 3, Exam 4)\n")
         for student in self.students:
             student_info = self.students[student]
-            #print(getattr(student_info,"name"))
-            # print("student id: ",student)
-            # pprint(vars(student_info))
-            # print()
+            print("student id: ",student)
+            pprint(vars(student_info))
+            print()
     
     def process_request(self, command):
         avrg = 0.0
         i = 0
-        studante_id = command[0]
         if command[1] == "GMA":
             for student_id in self.students:
                 avrg += getattr(self.students[student_id], "midterm")
@@ -103,17 +101,16 @@ class Classroom:
                 i += 1
             return (avrg/i)
         elif command[1] == "GG":
-            return {
-                getattr(self.students[command[0]], "lab_1"),
-                getattr(self.students[command[0]], "lab_2"),
-                getattr(self.students[command[0]], "lab_3"),
-                getattr(self.students[command[0]], "lab_4"),
-                getattr(self.students[command[0]], "midterm"),
-                getattr(self.students[command[0]], "exam_1"),
-                getattr(self.students[command[0]], "exam_2"),
-                getattr(self.students[command[0]], "exam_3"),
-                getattr(self.students[command[0]], "exam_4"),
-            }
+            student_id = int(command[0])
+            return(getattr(self.students[student_id], "lab_1"),
+                getattr(self.students[student_id], "lab_2"),
+                getattr(self.students[student_id], "lab_3"),
+                getattr(self.students[student_id], "lab_4"),
+                getattr(self.students[student_id], "midterm"),
+                getattr(self.students[student_id], "exam_1"),
+                getattr(self.students[student_id], "exam_2"),
+                getattr(self.students[student_id], "exam_3"),
+                getattr(self.students[student_id], "exam_4"))
         else:
             print("gtfo\n")
 

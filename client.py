@@ -97,7 +97,7 @@ class Client:
                 self.socket.close()
                 sys.exit(1)
 
-            print("Received: ", recvd_bytes.decode(Server.MSG_ENCODING))
+            print("Received: ", recvd_bytes.decode("utf-8"))
 
         except Exception as msg:
             print(msg)
