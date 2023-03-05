@@ -1,5 +1,6 @@
 import argparse
 import sys
+from pprint import pprint
 from student import *
 
 class Classroom:
@@ -59,7 +60,10 @@ class Classroom:
         print("(Name, ID Number, Key, Lab 1, Lab 2, Lab 3, Lab 4, Midterm, Exam 1, Exam 2, Exam 3, Exam 4)\n")
         for student in self.students:
             student_info = self.students[student]
-            print(getattr(student_info,"name"))
+            #print(getattr(student_info,"name"))
+            print("student id: ",student)
+            pprint(vars(student_info))
+            print()
     
     # def process_request(self, command):
     #     if command == "GMA":
