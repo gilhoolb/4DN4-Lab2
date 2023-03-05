@@ -99,18 +99,20 @@ class Classroom:
             for student_id in self.students:
                 avrg += getattr(self.students[student_id], "lab_4")
                 i += 1
-            return (avrg/i)
+            return str(avrg/i)
         elif command[1] == "GG":
             student_id = int(command[0])
-            return(getattr(self.students[student_id], "lab_1"),
-                getattr(self.students[student_id], "lab_2"),
-                getattr(self.students[student_id], "lab_3"),
-                getattr(self.students[student_id], "lab_4"),
-                getattr(self.students[student_id], "midterm"),
-                getattr(self.students[student_id], "exam_1"),
-                getattr(self.students[student_id], "exam_2"),
-                getattr(self.students[student_id], "exam_3"),
-                getattr(self.students[student_id], "exam_4"))
+            string = ''
+            string += str(getattr(self.students[student_id], "lab_1"))+", "+\
+                   str(getattr(self.students[student_id], "lab_2"))+", "+\
+                   str(getattr(self.students[student_id], "lab_3"))+", "+\
+                   str(getattr(self.students[student_id], "lab_4"))+", "+\
+                   str(getattr(self.students[student_id], "midterm"))+", "+\
+                   str(getattr(self.students[student_id], "exam_1"))+", "+\
+                   str(getattr(self.students[student_id], "exam_2"))+", "+\
+                   str(getattr(self.students[student_id], "exam_3"))+", "+\
+                   str(getattr(self.students[student_id], "exam_4"))
+            return string
         else:
             print("gtfo\n")
 
