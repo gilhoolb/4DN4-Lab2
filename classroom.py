@@ -10,7 +10,7 @@ class Classroom:
 
         self.import_class_info()
         self.parse_class_info()
-        self.print_class_info()
+        # self.print_class_info()
 
     def  import_class_info(self):
         try: 
@@ -61,26 +61,61 @@ class Classroom:
         for student in self.students:
             student_info = self.students[student]
             #print(getattr(student_info,"name"))
-            print("student id: ",student)
-            pprint(vars(student_info))
-            print()
+            # print("student id: ",student)
+            # pprint(vars(student_info))
+            # print()
     
-    # def process_request(self, command):
-    #     if command == "GMA":
-            
-    #     elif command == "GEA":
-
-    #     elif command == "GL1A":
-
-    #     elif command == "GL2A":
-        
-    #     elif command == "GL3A":
-
-    #     elif command == "GL4A":
-
-    #     elif command == "GG":
-        
-    #     else:
+    def process_request(self, command):
+        avrg = 0.0
+        i = 0
+        studante_id = command[0]
+        if command[1] == "GMA":
+            for student_id in self.students:
+                avrg += getattr(self.students[student_id], "midterm")
+                i += 1
+            return (avrg/i)
+        elif command[1] == "GEA":
+            for student_id in self.students:
+                avrg += getattr(self.students[student_id], "exam_1")
+                avrg += getattr(self.students[student_id], "exam_2")
+                avrg += getattr(self.students[student_id], "exam_3")
+                avrg += getattr(self.students[student_id], "exam_4")
+                i += 4
+            return (avrg/i)
+        elif command[1] == "GL1A":
+            for student_id in self.students:
+                avrg += getattr(self.students[student_id], "lab_1")
+                i += 1
+            return (avrg/i)
+        elif command[1] == "GL2A":
+            for student_id in self.students:
+                avrg += getattr(self.students[student_id], "lab_2")
+                i += 1
+            return (avrg/i)
+        elif command[1] == "GL3A":
+            for student_id in self.students:
+                avrg += getattr(self.students[student_id], "lab_3")
+                i += 1
+            return (avrg/i)
+        elif command[1] == "GL4A":
+            for student_id in self.students:
+                avrg += getattr(self.students[student_id], "lab_4")
+                i += 1
+            return (avrg/i)
+        elif command[1] == "GG":
+            return {
+                getattr(self.students[command[0]], "lab_1"),
+                getattr(self.students[command[0]], "lab_2"),
+                getattr(self.students[command[0]], "lab_3"),
+                getattr(self.students[command[0]], "lab_4"),
+                getattr(self.students[command[0]], "midterm"),
+                getattr(self.students[command[0]], "exam_1"),
+                getattr(self.students[command[0]], "exam_2"),
+                getattr(self.students[command[0]], "exam_3"),
+                getattr(self.students[command[0]], "exam_4"),
+            }
+        else:
+            print("gtfo\n")
 
 if __name__ == "__main__":
     classroom = Classroom("course_grades_2023.csv")

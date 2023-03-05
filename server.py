@@ -5,12 +5,10 @@ import sys
 from cryptography.fernet import Fernet
 from classroom import *
 
-
-
 class  Server:
     HOST = "0.0.0.0"
     PORT = 50000
-
+    
     RECV_BUFFER_SIZE = 1024
     MAX_BACKLOG = 10
 
@@ -22,7 +20,7 @@ class  Server:
     #fernet = Fernet(encryption_key_bytes)
 
     def __init__(self):
-        my_class = Classroom(class_file="course_grades_2023.csv")
+        self.my_class = Classroom(class_file="course_grades_2023.csv")
 
         self.create_listen_socket()
         self.process_connections()
@@ -77,10 +75,13 @@ class  Server:
                     break
                 
                 #Decode message  and print
-                recvd_str =  recvd.decode("utf-8")
+                recvd_str = recvd.decode("utf-8")
+                recvd_str =  recvd_str.split(',')
+                recvd_str[0] = recvd_str[0].strip()
+                recvd_str[1] = recvd_str[1].strip()
                 print("Received: ", recvd_str)
 
-                #self.my_class.process_request(recvd_str)
+                result = self.my_class.process_request(recvd_str)
 
                 #Encrypt result of above
 
@@ -90,8 +91,8 @@ class  Server:
 
                 #return to listen state
 
-            except Exception:
-                print("Error")
+            except Exception as ass:
+                print(str(ass))
                 sys.exit(1)
 
             
