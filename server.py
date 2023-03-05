@@ -80,10 +80,13 @@ class  Server:
                 recvd_str =  recvd.decode("utf-8")
                 print("Received: ", recvd_str)
 
+                self.my_class.process_request(recvd_str)
+
             except Exception:
                 print("Error")
                 sys.exit(1)
 
+            
 
                 
 if __name__ == "__main__":

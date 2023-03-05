@@ -59,6 +59,24 @@ class Classroom:
         print("(Name, ID Number, Key, Lab 1, Lab 2, Lab 3, Lab 4, Midterm, Exam 1, Exam 2, Exam 3, Exam 4)\n")
         for student in self.student_list:
             print(student)
+    
+    def process_request(self, command):
+        
+        if command == "GMA":
+            
+        elif command == "GEA":
+
+        elif command == "GL1A":
+
+        elif command == "GL2A":
+        
+        elif command == "GL3A":
+
+        elif command == "GL4A":
+
+        elif command == "GG":
+        
+        else
 
 if __name__ == "__main__":
     classroom = Classroom("course_grades_2023.csv")
