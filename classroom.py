@@ -10,7 +10,7 @@ class Classroom:
 
         self.import_class_info()
         self.parse_class_info()
-        # self.print_class_info()
+        self.print_class_info()
 
     def  import_class_info(self):
         try: 
@@ -23,6 +23,7 @@ class Classroom:
                         [line.strip() for line in file.readlines()]
                         if clean_line != '']
         self.records.pop(0)
+        
         
         file.close()
 
@@ -56,13 +57,13 @@ class Classroom:
                 sys.exit(1)
 
     def print_class_info(self):
-        print("Class Info:")
+        print("Printing Data from CSV: ")
         print("(Name, ID Number, Key, Lab 1, Lab 2, Lab 3, Lab 4, Midterm, Exam 1, Exam 2, Exam 3, Exam 4)\n")
-        for student in self.students:
-            student_info = self.students[student]
-            print("student id: ",student)
-            pprint(vars(student_info))
-            print()
+        for student_id in self.students:
+            student_info = self.students[student_id]
+            rplcmnt = ", "+ str(student_id)+", "
+            print(str(student_info).replace(", ", rplcmnt, 1))
+        print()
     
     def process_request(self, command):
         avrg = 0.0

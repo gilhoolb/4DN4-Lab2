@@ -11,5 +11,9 @@ class Student:
         self.exam_2 = Exam_2
         self.exam_3 = Exam_3
         self.exam_4 = Exam_4
+
+    def __str__(self):
+         return f"{self.name}, {self.key}, {self.lab_1}, {self.lab_2}, {self.lab_3}, {self.lab_4}, "+\
+            f"{self.midterm}, {self.exam_1}, {self.exam_2}, {self.exam_3}, {self.exam_4}"
     
     
