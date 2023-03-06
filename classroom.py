@@ -67,7 +67,8 @@ class Classroom:
     
     def process_request(self, command):
         avrg = 0.0
-        i = 0
+        i = 0   
+
         if command[1] == "GMA":
             for student_id in self.students:
                 avrg += getattr(self.students[student_id], "midterm")
@@ -114,8 +115,6 @@ class Classroom:
                    str(getattr(self.students[student_id], "exam_3"))+", "+\
                    str(getattr(self.students[student_id], "exam_4"))
             return string
-        else:
-            print("gtfo\n")
 
 if __name__ == "__main__":
     classroom = Classroom("course_grades_2023.csv")

@@ -28,7 +28,7 @@ class  Server:
     
 
     def create_listen_socket(self):
-        try:
+        # try:
             # Create  IPv4 socket
             self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -41,9 +41,9 @@ class  Server:
             # Set socket to listen
             self.socket.listen(Server.MAX_BACKLOG)
             print("Listening on port {} ...".format(Server.PORT))
-        except Exception as excpt:
-            print(excpt)
-            sys.exit(1)
+        # except Exception as excpt:
+        #     print(excpt)
+        #     sys.exit(1)
 
     def process_connections(self):
         try:
@@ -61,7 +61,6 @@ class  Server:
         connection, address_port =  client
         print("*" *  70)
         print("Connection received from {}.".format(address_port))
-        print(client)
 
         while True:
             try:
@@ -72,6 +71,7 @@ class  Server:
                 if len(recvd) == 0:
                     print("Closing client connection ...")
                     connection.close()
+                    print("Listening on port {} ...".format(Server.PORT))
                     break
                 
                 #Decode message  and print
@@ -79,7 +79,24 @@ class  Server:
                 recvd_str =  recvd_str.split(',')
                 recvd_str[0] = recvd_str[0].strip()
                 recvd_str[1] = recvd_str[1].strip()
-                print("Received: ", recvd_str)
+
+                if (int(recvd_str[0]) in self.my_class.students):
+                    print("User", recvd_str[0], "found!")
+                else:
+                    print("User", recvd_str[0], "not found!")
+                    connection.close()
+                    print("Listening on port {} ...".format(Server.PORT))
+                    break
+                
+                if (recvd_str[1] in {"GMA", "GEA", "GL1A", "GL2A", "GL3A", "GL4A", "GG"}):
+                    print("CMD", recvd_str[1], "found!")
+                else:
+                    print("CMD", recvd_str[1], "not found!")
+                    connection.close()
+                    print("Listening on port {} ...".format(Server.PORT))
+                    break
+
+                print("Received cmd:", recvd_str[1], "for student:", recvd_str[0])
 
                 result = self.my_class.process_request(recvd_str)
                 print(result)

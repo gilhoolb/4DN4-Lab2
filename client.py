@@ -49,7 +49,7 @@ class Client:
         try:
             # Connect to the server using its socket address tuple.
             self.socket.connect((Client.SERVER_HOSTNAME, Server.PORT))
-            print("Connected to \"{}\" on port {}".format(Client.SERVER_HOSTNAME, Server.PORT))
+            # print("Connected to \"{}\" on port {}".format(Client.SERVER_HOSTNAME, Server.PORT))
         except Exception as msg:
             print(msg)
             sys.exit(1)
@@ -58,9 +58,29 @@ class Client:
         # In this version we keep prompting the user until a non-blank
         # line is entered, i.e., ignore blank lines.
         while True:
-            self.input_text = input("Input: ")
+            student_id = input("Student_ID: ")
+            cmd = input("CMD: ")
+            self.input_text = student_id + "," + cmd
+            print("Command entered: ", cmd)
             if self.input_text != "":
                 break
+        
+        if cmd == "GMA":
+            print("Fetching Midterm Average:")
+        elif cmd == "GEA":
+            print("Fetching Exam Average:")
+        elif cmd == "GL1A":
+            print("Fetching Lab 1 Average:")
+        elif cmd == "GL2A":
+            print("Fetching Lab 2 Average:")
+        elif cmd == "GL3A":
+            print("Fetching Lab 3 Average:")
+        elif cmd== "GL4A":
+            print("Fetching Lab 4 Average:")
+        elif cmd == "GG":
+            print("Fetching Student ", student_id, " grades:")
+        else:
+            print("GTFO with your invalid ass command bitch\n")
     
     def send_console_input_forever(self):
         while True:
@@ -101,14 +121,13 @@ class Client:
                 self.socket.close()
                 sys.exit(1)
 
-            recvd_str =  recvd_bytes.decode("utf-8")
-
-            key = input("Data received, Please enter your encryption key: ")
+            # key = input("Data received, Please enter your encryption key: ")
+            key = "M7E8erO15CIh902P8DQsHxKbOADTgEPGHdiY0MplTuY="
             fernet = Fernet(key)
 
-            recvd_msg = fernet.decrypt(recvd_str)
-
-            print("Received: ",recvd_msg.decode("utf-8"))
+            recvd_msg = fernet.decrypt(recvd_bytes)
+            recvd_str = recvd_msg.decode("utf-8")
+            print(recvd_str)
 
 
         except Exception as msg:
