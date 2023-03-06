@@ -84,15 +84,16 @@ class  Server:
                 result = self.my_class.process_request(recvd_str)
                 print(result)
                 #Encrypt result of above
+                key = getattr(self.my_class.students[int(recvd_str[0])], "key")
+                key_bytes = key.encode("utf-8")
+                fernet  = Fernet(key_bytes)
+                encrypted_message = fernet.encrypt(result.encode("utf-8"))
 
                 #send back to client
-
-                #close connection
-
-                #return to listen state
+                connection.sendall(encrypted_message)
 
             except Exception as ass:
-                print("error:",ass)
+                print("Error:",ass)
                 sys.exit(1)
 
             

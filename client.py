@@ -18,7 +18,10 @@ class Client:
     # RECV_BUFFER_SIZE = 5 # Used for recv.    
     RECV_BUFFER_SIZE = 1024 # Used for recv.
 
+
+
     def __init__(self):
+        self.get_console_input()
         self.get_socket()
         self.connect_to_server()
         self.send_console_input_forever()
@@ -62,9 +65,10 @@ class Client:
     def send_console_input_forever(self):
         while True:
             try:
-                self.get_console_input()
+                #self.get_console_input()
                 self.connection_send()
                 self.connection_receive()
+                self.close_restart()
             except (KeyboardInterrupt, EOFError):
                 print()
                 print("Closing server connection ...")
@@ -93,15 +97,31 @@ class Client:
             # other end. In that case, close the connection on this
             # end and exit.
             if len(recvd_bytes) == 0:
-                print("Closing server connection ... ")
+                print("Closing server connection.")
                 self.socket.close()
                 sys.exit(1)
 
-            print("Received: ", recvd_bytes.decode("utf-8"))
+            recvd_str =  recvd_bytes.decode("utf-8")
+
+            key = input("Data received, Please enter your encryption key: ")
+            fernet = Fernet(key)
+
+            recvd_msg = fernet.decrypt(recvd_str)
+
+            print("Received: ",recvd_msg.decode("utf-8"))
+
 
         except Exception as msg:
             print(msg)
             sys.exit(1)
+
+    def close_restart(self):
+        self.socket.close()
+        print("\nSocket is disconnected.\n")
+        self.get_console_input()
+        self.get_socket()
+        self.connect_to_server()
+
 
 if __name__ == "__main__":
    Client()

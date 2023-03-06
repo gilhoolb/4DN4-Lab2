@@ -71,7 +71,7 @@ class Classroom:
             for student_id in self.students:
                 avrg += getattr(self.students[student_id], "midterm")
                 i += 1
-            return (avrg/i)
+            return str(avrg/i)
         elif command[1] == "GEA":
             for student_id in self.students:
                 avrg += getattr(self.students[student_id], "exam_1")
@@ -79,22 +79,22 @@ class Classroom:
                 avrg += getattr(self.students[student_id], "exam_3")
                 avrg += getattr(self.students[student_id], "exam_4")
                 i += 4
-            return (avrg/i)
+            return str(avrg/i)
         elif command[1] == "GL1A":
             for student_id in self.students:
                 avrg += getattr(self.students[student_id], "lab_1")
                 i += 1
-            return (avrg/i)
+            return str(avrg/i)
         elif command[1] == "GL2A":
             for student_id in self.students:
                 avrg += getattr(self.students[student_id], "lab_2")
                 i += 1
-            return (avrg/i)
+            return str(avrg/i)
         elif command[1] == "GL3A":
             for student_id in self.students:
                 avrg += getattr(self.students[student_id], "lab_3")
                 i += 1
-            return (avrg/i)
+            return str(avrg/i)
         elif command[1] == "GL4A":
             for student_id in self.students:
                 avrg += getattr(self.students[student_id], "lab_4")
