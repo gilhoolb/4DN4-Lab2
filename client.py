@@ -11,9 +11,6 @@ class Client:
     # SERVER_HOSTNAME = "192.168.1.22"
     SERVER_HOSTNAME = "localhost"
     
-    # Try connecting to the compeng4dn4 echo server. You need to change
-    # the destination port to 50007 in the connect function below.
-    # SERVER_HOSTNAME = 'compeng4dn4.mooo.com'
 
     # RECV_BUFFER_SIZE = 5 # Used for recv.    
     RECV_BUFFER_SIZE = 1024 # Used for recv.
@@ -26,10 +23,6 @@ class Client:
         self.connect_to_server()
         self.send_console_input_forever()
 
-        #receive data from server
-        #decrypt message
-        #close conncetion
-        #wait for another user command
 
     def get_socket(self):
         try:
@@ -80,7 +73,9 @@ class Client:
         elif cmd == "GG":
             print("Fetching Student ", student_id, " grades:")
         else:
-            print("GTFO with your invalid ass command bitch\n")
+            print("Invalid command.\n")
+            sys.exit(1)
+
     
     def send_console_input_forever(self):
         while True:
@@ -121,8 +116,7 @@ class Client:
                 self.socket.close()
                 sys.exit(1)
 
-            # key = input("Data received, Please enter your encryption key: ")
-            key = "M7E8erO15CIh902P8DQsHxKbOADTgEPGHdiY0MplTuY="
+            key = input("Data received, Please enter your encryption key: ")
             fernet = Fernet(key)
 
             recvd_msg = fernet.decrypt(recvd_bytes)

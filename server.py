@@ -14,11 +14,6 @@ class  Server:
 
     SOCKET_ADDR = (HOST, PORT)
 
-    #encryption_key = Fernet.generate_key()
-    #encryption_key = "bVE5-55Cgksfgg9VQBXjHEBiycWiodLT5_BmwHenKcQ="
-    #encryption_key_bytes = encryption_key.encode('utf-8')
-    #fernet = Fernet(encryption_key_bytes)
-
     def __init__(self):
         self.my_class = Classroom(class_file="course_grades_2023.csv")
 
